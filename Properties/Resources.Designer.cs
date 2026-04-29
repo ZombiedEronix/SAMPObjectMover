@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampObjectMove.Properties {
+namespace ObjectMover.Properties {
     using System;
     
     

@@ -1,4 +1,4 @@
-﻿namespace SampObjectMove
+﻿namespace ObjectMover
 {
     partial class ResultForm
     {

@@ -1,6 +1,9 @@
-﻿namespace SampObjectMove
+﻿using System.Reflection;
+using System.Windows.Forms;
+
+namespace ObjectMover
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -43,8 +46,6 @@
             this.CenterYBox = new System.Windows.Forms.TextBox();
             this.CenterZLabel = new System.Windows.Forms.Label();
             this.CenterZBox = new System.Windows.Forms.TextBox();
-            this.ObjectTypeBox = new System.Windows.Forms.ComboBox();
-            this.ObjType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ButtonConvert
@@ -54,7 +55,7 @@
             this.ButtonConvert.Size = new System.Drawing.Size(75, 23);
             this.ButtonConvert.TabIndex = 6;
             this.ButtonConvert.UseVisualStyleBackColor = true;
-            this.ButtonConvert.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonConvert.Click += new System.EventHandler(this.StartConvertation);
             // 
             // CenterX
             // 
@@ -84,46 +85,46 @@
             // 
             this.LabelCenterX.Location = new System.Drawing.Point(0, 0);
             this.LabelCenterX.Name = "LabelCenterX";
-            this.LabelCenterX.Size = new System.Drawing.Size(100, 23);
+            this.LabelCenterX.Size = new System.Drawing.Size(100, 25);
             this.LabelCenterX.TabIndex = 2;
             // 
             // LabelCenterY
             // 
             this.LabelCenterY.Location = new System.Drawing.Point(0, 0);
             this.LabelCenterY.Name = "LabelCenterY";
-            this.LabelCenterY.Size = new System.Drawing.Size(100, 23);
+            this.LabelCenterY.Size = new System.Drawing.Size(100, 25);
             this.LabelCenterY.TabIndex = 1;
             // 
             // LabelCenterZ
             // 
             this.LabelCenterZ.Location = new System.Drawing.Point(0, 0);
             this.LabelCenterZ.Name = "LabelCenterZ";
-            this.LabelCenterZ.Size = new System.Drawing.Size(100, 23);
+            this.LabelCenterZ.Size = new System.Drawing.Size(100, 25);
             this.LabelCenterZ.TabIndex = 0;
             // 
             // ConvertButton
             // 
-            this.ConvertButton.Location = new System.Drawing.Point(12, 434);
+            this.ConvertButton.Location = new System.Drawing.Point(12, 435);
             this.ConvertButton.Name = "ConvertButton";
             this.ConvertButton.Size = new System.Drawing.Size(100, 23);
             this.ConvertButton.TabIndex = 8;
             this.ConvertButton.Text = "Convert";
             this.ConvertButton.UseVisualStyleBackColor = true;
-            this.ConvertButton.Click += new System.EventHandler(this.button1_Click);
+            this.ConvertButton.Click += new System.EventHandler(this.StartConvertation);
             // 
             // CodeText
             // 
-            this.CodeText.Location = new System.Drawing.Point(118, 36);
+            this.CodeText.Location = new System.Drawing.Point(118, 35);
             this.CodeText.Name = "CodeText";
             this.CodeText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
-            this.CodeText.Size = new System.Drawing.Size(824, 421);
+            this.CodeText.Size = new System.Drawing.Size(825, 420);
             this.CodeText.TabIndex = 9;
-            this.CodeText.Text = "CreateDynamicObject(2000, -3853.51465, -2164.15625, -0.08196, 0.00000, 0.00000, 0" +
-    ".00000, DM_WORLD, 12);";
+            this.CodeText.Text = "CreateDynamicObject(2000, -123.514, -164.15625, -0.08196, 0.00000, 0.00000, 0.000" +
+    "00, -1, 12);";
             // 
             // CenterXBox
             // 
-            this.CenterXBox.Location = new System.Drawing.Point(12, 52);
+            this.CenterXBox.Location = new System.Drawing.Point(12, 50);
             this.CenterXBox.Name = "CenterXBox";
             this.CenterXBox.Size = new System.Drawing.Size(100, 20);
             this.CenterXBox.TabIndex = 10;
@@ -132,24 +133,24 @@
             // CenterXLabel
             // 
             this.CenterXLabel.AutoSize = true;
-            this.CenterXLabel.Location = new System.Drawing.Point(12, 36);
+            this.CenterXLabel.Location = new System.Drawing.Point(12, 35);
             this.CenterXLabel.Name = "CenterXLabel";
-            this.CenterXLabel.Size = new System.Drawing.Size(45, 13);
+            this.CenterXLabel.Size = new System.Drawing.Size(48, 13);
             this.CenterXLabel.TabIndex = 11;
-            this.CenterXLabel.Text = "CenterX";
+            this.CenterXLabel.Text = "Center X";
             // 
             // CenterYLabel
             // 
             this.CenterYLabel.AutoSize = true;
             this.CenterYLabel.Location = new System.Drawing.Point(12, 75);
             this.CenterYLabel.Name = "CenterYLabel";
-            this.CenterYLabel.Size = new System.Drawing.Size(45, 13);
+            this.CenterYLabel.Size = new System.Drawing.Size(48, 13);
             this.CenterYLabel.TabIndex = 13;
-            this.CenterYLabel.Text = "CenterY";
+            this.CenterYLabel.Text = "Center Y";
             // 
             // CenterYBox
             // 
-            this.CenterYBox.Location = new System.Drawing.Point(12, 91);
+            this.CenterYBox.Location = new System.Drawing.Point(12, 90);
             this.CenterYBox.Name = "CenterYBox";
             this.CenterYBox.Size = new System.Drawing.Size(100, 20);
             this.CenterYBox.TabIndex = 12;
@@ -158,11 +159,11 @@
             // CenterZLabel
             // 
             this.CenterZLabel.AutoSize = true;
-            this.CenterZLabel.Location = new System.Drawing.Point(12, 114);
+            this.CenterZLabel.Location = new System.Drawing.Point(12, 115);
             this.CenterZLabel.Name = "CenterZLabel";
-            this.CenterZLabel.Size = new System.Drawing.Size(45, 13);
+            this.CenterZLabel.Size = new System.Drawing.Size(48, 13);
             this.CenterZLabel.TabIndex = 15;
-            this.CenterZLabel.Text = "CenterZ";
+            this.CenterZLabel.Text = "Center Z";
             // 
             // CenterZBox
             // 
@@ -172,36 +173,12 @@
             this.CenterZBox.TabIndex = 14;
             this.CenterZBox.Text = "0.0";
             // 
-            // ObjectTypeBox
-            // 
-            this.ObjectTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ObjectTypeBox.FormattingEnabled = true;
-            this.ObjectTypeBox.ImeMode = System.Windows.Forms.ImeMode.Close;
-            this.ObjectTypeBox.Items.AddRange(new object[] {
-            "CreateObject",
-            "CreateDynamicObject"});
-            this.ObjectTypeBox.Location = new System.Drawing.Point(12, 169);
-            this.ObjectTypeBox.Name = "ObjectTypeBox";
-            this.ObjectTypeBox.Size = new System.Drawing.Size(100, 21);
-            this.ObjectTypeBox.TabIndex = 16;
-            // 
-            // ObjType
-            // 
-            this.ObjType.AutoSize = true;
-            this.ObjType.Location = new System.Drawing.Point(12, 153);
-            this.ObjType.Name = "ObjType";
-            this.ObjType.Size = new System.Drawing.Size(65, 13);
-            this.ObjType.TabIndex = 17;
-            this.ObjType.Text = "Object Type";
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateGray;
-            this.ClientSize = new System.Drawing.Size(954, 469);
-            this.Controls.Add(this.ObjType);
-            this.Controls.Add(this.ObjectTypeBox);
+            this.ClientSize = new System.Drawing.Size(960, 470);
             this.Controls.Add(this.CenterZLabel);
             this.Controls.Add(this.CenterZBox);
             this.Controls.Add(this.CenterYLabel);
@@ -221,9 +198,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
-            this.Text = "S.A.M.PObjectMover 0.1 | By ZombiedEronix";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "MainForm";
+            this.Text = "S.A.M.P Object Offset Tool | By ZombiedEronix";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

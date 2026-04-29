@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SampObjectMove
+namespace ObjectMover
 {
     public partial class ResultForm : Form
     {
